@@ -2,7 +2,7 @@
 const debug = require = require('debug')('note:server');
 const express = require('express');
 const bodyParser = require('body-parser');
-const matchscore = require('./route/matchscore-router');
+const matchscoreRouter = require('./route/matchscore-router');
 const port = process.env.PORT || 3000;
 const app = express();
 
