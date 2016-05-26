@@ -2,7 +2,7 @@
 
 const Router = require('express').Router;
 const matchscoreRouter = module.exports = new Router();
-const debug = require('debug')('note:note-router');
+const debug = require('debug')('matchscore:matchscore-router');
 const AppError = require('../lib/app-error');
 const storage = require('../lib/storage');
 const Matchscore = require('../lib/matchscore');

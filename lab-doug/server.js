@@ -1,5 +1,5 @@
 'use strict';
-const debug = require = require('debug')('note:server');
+const debug = require = require('debug')('matchscore:server');
 const express = require('express');
 const bodyParser = require('body-parser');
 const matchscoreRouter = require('./route/matchscore-router');
