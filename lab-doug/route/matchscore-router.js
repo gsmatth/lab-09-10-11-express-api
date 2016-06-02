@@ -77,8 +77,7 @@ matchscoreRouter.put('/:uuid',function(req, res){
 
 matchscoreRouter.get('/:uuid', function(req, res){
   storage.fetchItem('matchscore', req.params.uuid)
-  .then(function(){
-    //build updated object
+  .then(function(matchscore){
     res.status(200).json(matchscore);
   }).catch(function(err){
     console.error(err.message);
