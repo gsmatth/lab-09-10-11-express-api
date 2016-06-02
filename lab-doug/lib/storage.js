@@ -7,35 +7,35 @@ exports.pool = {};
 exports.setItem = function(schema, item){
   debug('setItem');
   return new Promise(function(resolve, reject){
-    if(!item.id){
-      var err = AppError.error400('storage setItem requires id');
+    if(!item.uuid){
+      var err = AppError.error400('storage.js setItem method requires uuid');
       return reject(err);
     }
     if(!this.pool[schema])this.pool[schema] = {};
-    this.pool[schema][item.id] = item;
+    this.pool[schema][item.uuid] = item;
     resolve(item);
   });
 };
 
-exports.fetchItem = function(schema, id){
+exports.fetchItem = function(schema, uuid){
   debug('fetchItem');
   return new Promise((resolve, reject) => {
     if(!this.pool[schema]){
       var err = AppError.error404('storage item not found in fetchItem() storage.js');
       return reject(err);
     }
-    resolve(this.pool[schema][id]);
+    resolve(this.pool[schema][uuid]);
   });
 };
 
-exports.deleteItem = function(schema, id){
+exports.deleteItem = function(schema, uuid){
   debug('deleteItem');
   return new Promise((resolve, reject) => {
     if(!this.pool[schema]){
       var err = AppError.error404('storage schema not found in deleteItem() storage.js');
       return reject(err);
     }
-    delete this.pool[schema][id];
+    delete this.pool[schema][uuid];
     resolve(true);
   });
 };
