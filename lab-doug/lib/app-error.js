@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('begug')('matchscore:app-error');
+const debug = require('debug')('matchscore:app-error');
 
 const AppError = module.exports = function(message, statusCode, responseMessage){
   debug('creating app error');
