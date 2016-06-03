@@ -32,7 +32,7 @@ function createMatchscore(reqBody){
   });
 }
 
-matchscoreRouter.post('/', bodyParser, function(req, res){
+matchscoreRouter.post('/', function(req, res){
   debug('hit endpoint /api/matchscore POST');
   console.log('invoking createMatchscore in matchscoreRouter.post');
   createMatchscore(req.body)
@@ -51,17 +51,12 @@ matchscoreRouter.post('/', bodyParser, function(req, res){
   });
 });
 
-//update
 matchscoreRouter.put('/:uuid',function(req, res){
-  storage.fetchItem('matchscore', req.params.uuid)//this.pool[schema][uuid]);
+  storage.fetchItem('matchscore', req.params.uuid)
   .then(function(matchscore){
-    console.log('value of matchscore.score: ', matchscore.score);
-    console.log('value of matchscore: ', matchscore);
-    console.log('req.body content: ', req.body);
     matchscore.distance = req.body.distance;
     matchscore.score = req.body.score;
     matchscore.xCount = req.body.xCount;
-    console.log('value of matchscore: ', matchscore);
     res.status(200).json(matchscore);
   }).catch(function(err){
     console.error(err.message);
@@ -91,11 +86,9 @@ matchscoreRouter.get('/:uuid', function(req, res){
   });
 });
 
-//update
 matchscoreRouter.delete('/:uuid', function(req, res){
   storage.deleteItem('matchscore', req.params.uuid)
   .then(function(matchscore){
-    console.log('deleted object: ', matchscore);
     res.status(200).json(matchscore);
   }).catch(function(err){
     console.error(err.message);
