@@ -4,12 +4,11 @@ const debug = require('debug')('matchscore:matchscore');
 const AppError = require('../lib/app-error');
 
 module.exports = function(distance, score, xCount){
-  console.log('entered matchscore constructor');
+  console.log('teting nodemon');
   debug('creating matchscore');
-  if(!distance) throw AppError.error400('matchscore requires distance');
+  if(!distance || !score || !xCount) throw AppError.error400('bad request');
   this.uuid = uuid.v4();
   this.distance = distance;
   this.score = score;
   this.xCount = xCount;
-  console.log('this.score value: ', this.score);
 };

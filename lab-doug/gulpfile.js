@@ -2,10 +2,10 @@
 
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
-const nodemon = require('gulp-nodemon');
+const nodemon = require('nodemon');
 const mocha = require('gulp-mocha');
 
-const path = ['*.js', 'lib/*.js', 'model/*.js', 'route/*.js', 'test/*.js'];
+const paths = ['*.js', 'lib/*.js', 'model/*.js', 'route/*.js', 'test/*.js'];
 
 
 gulp.task('eslint', function(){
@@ -15,9 +15,11 @@ gulp.task('eslint', function(){
   .pipe(eslint.failAfterError());
 });
 
-// gulp.task('test', () => {
-//   return gulp.src(['./test/'])
-// });
+gulp.task('mocha', function(){
+  return gulp.src(['./test/matchscore-router-test.js'])
+    //stream  through gulp-mocha
+    .pipe(mocha());
+});
 
 gulp.task('nodemon', function(){
   nodemon({
@@ -26,4 +28,4 @@ gulp.task('nodemon', function(){
   });
 });
 
-gulp.task('default', ['eslint', 'test']);
+gulp.task('default', ['eslint', 'mocha']);
