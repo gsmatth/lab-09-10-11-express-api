@@ -26,6 +26,7 @@
     "gulp-eslint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
     "mocha": "^2.5.3",
+    "morgan": "^1.7.0",
     "nodemon": "^1.9.2",
     "superagent": "^2.0.0"
   },
