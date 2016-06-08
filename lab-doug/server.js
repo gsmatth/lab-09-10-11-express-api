@@ -1,9 +1,9 @@
 'use strict';
 const debug = require('debug')('matchscore:server');
 const express = require('express');
-const errorResponse = require('./lib/error-response');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const errorResponse = require('./lib/error-response');
 const matchscoreRouter = require('./route/matchscore-router');
 const port = process.env.PORT || 3000;
 /*The app object denotes the Express application.  The app returned by express() is in fact a JavaScript Function, designed to be passed to Node’s HTTP servers as a callback to handle requests.*/

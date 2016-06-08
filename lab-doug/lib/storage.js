@@ -8,16 +8,13 @@ exports.setItem = (function(schema, item) {
   debug('setItem in storage.js');
   return new Promise((resolve, reject) => {
     if(!item.uuid){
-      // console.log('entered error block in setItem');
       var err = AppError.error400('storage.js setItem method requires uuid');
       return reject(err);
     }
     if(!this.pool[schema]){
-      // console.log('an object with this schema does not exist, create it storage.js');
       this.pool[schema] = {};
     }
     this.pool[schema][item.uuid] = item;
-    // console.log('pool content: ', this.pool);
     resolve(item);
   });
 });
@@ -44,7 +41,6 @@ exports.deleteItem = function(schema, uuid){
       var err = AppError.error404('storage schema not found in deleteItem() storage.js');
       return reject(err);
     }
-    // console.log('entering delete in storage.js deleteItem(): ', this.pool[schema][uuid]);
     delete this.pool[schema][uuid];
     resolve(true);
   });

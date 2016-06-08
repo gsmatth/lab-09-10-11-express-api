@@ -103,12 +103,10 @@ describe('Testing matchscore-router module, ', function(){
     });
     it('should return a 400 error with bad request', (done) => {
       request.put(`${baseUrl}/${this.tempMatchscore.uuid}`)
-      .send({distance: 600, score:569, xCount: 27})
+      .send({distance: 600, score: 300})
       .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body.score).to.equal(569);
-        // expect(err.status).to.equal(400);
-        // expect(res.text).to.equal('bad request');
+        expect(err.status).to.equal(400);
+        expect(res.text).to.equal('bad request');
         done();
       });
     });

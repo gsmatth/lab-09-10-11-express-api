@@ -5,14 +5,14 @@ const debug = require('debug')('matchscore:matchscore-router');
 const matchscoreRouter = module.exports = new Router();
 const AppError = require('../lib/app-error');
 const storage = require('../lib/storage');
-const MatchScoreModel = require('../model/matchscore');
+const Matchscore = require('../model/matchscore');
 
 function createMatchscore(reqBody){
   debug('createMatchscore');
   return new Promise(function(resolve, reject){
     var matchscore;
     try{
-      matchscore = new MatchScoreModel(reqBody.distance, reqBody.score, reqBody.xCount);
+      matchscore = new Matchscore(reqBody.distance, reqBody.score, reqBody.xCount);
     } catch(err){
       return  reject(err);
     }
@@ -37,7 +37,7 @@ matchscoreRouter.post('/', function(req, res){
 matchscoreRouter.put('/:uuid',function(req, res){
   storage.fetchItem('matchscore', req.params.uuid)
   .then(function(matchscore){
-    if(!req.body.distance) return AppError.error400('bad object on put');
+    if(!req.body.distance || !req.body.score || !req.body.xCount) throw AppError.error400('bad req.body submitted on PUT route');
     matchscore.distance = req.body.distance;
     matchscore.score = req.body.score;
     matchscore.xCount = req.body.xCount;
