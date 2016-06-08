@@ -4,7 +4,6 @@ const debug = require('debug')('matchscore:matchscore');
 const AppError = require('../lib/app-error');
 
 module.exports = function(distance, score, xCount){
-  console.log('teting nodemon');
   debug('creating matchscore');
   if(!distance || !score || !xCount) throw AppError.error400('bad request');
   this.uuid = uuid.v4();

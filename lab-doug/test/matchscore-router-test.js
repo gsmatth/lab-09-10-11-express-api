@@ -8,7 +8,6 @@ const port = process.env.PORT || 3000;
 const baseUrl = `localhost:${port}/api/matchscore`;
 
 
-
 describe('Testing matchscore-router module, ', function(){
   before((done) => {
     if(!server.isRunning){
@@ -76,9 +75,7 @@ describe('Testing matchscore-router module, ', function(){
       request.get(`${baseUrl}/${123}`)
       .end((err, res) => {
         expect(err.status).to.equal(404);
-        // expect(err.statusCode).to.equal(404);
         expect(res.text).to.equal('not found');
-        // expect(err.responseMessage).to.equal('not found');
         done();
       });
     });
@@ -104,12 +101,12 @@ describe('Testing matchscore-router module, ', function(){
         done();
       });
     });
-    it('should return a 400 error with bad request response', (done) => {
+    it('should return a 400 error with bad request', (done) => {
       request.put(`${baseUrl}/${this.tempMatchscore.uuid}`)
-      .send({distance:300})
+      .send({distance: 600, score:569, xCount: 27})
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.score).to.equal(undefined);
+        expect(res.body.score).to.equal(569);
         // expect(err.status).to.equal(400);
         // expect(res.text).to.equal('bad request');
         done();
@@ -117,21 +114,3 @@ describe('Testing matchscore-router module, ', function(){
     });
   });
 });
-
-/*
-express app up on port:  3000
-  Testing matchscore-router module,
-    Testing POST on /api/matchscore endpoint
-      ✓ should return a matchscore object (58ms)
-    Testing GET on api/matchscore/:uuid
-      ✓ it should return a matchscore object as res.body (74ms)
-UUID not found in memory pool
-      ✓ it should return a 404/not found on invalid route (55ms)
-    Testing PUT on api/matchscore/:uuid
-      ✓ should return a modified matchscore object
-      ✓ should return a 400 error with bad request response
-server has been shutdown
-
-
-  5 passing (264ms)
-*/

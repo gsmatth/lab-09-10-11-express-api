@@ -30,49 +30,26 @@ matchscoreRouter.post('/', function(req, res){
   createMatchscore(req.body)
   .then(function(matchscore){
     res.status(200).json(matchscore);
-  }).catch(function(err){
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode)
-      .send(err.responseMessage);
-      return;
-    }
-    res.status(500)
-    .send('internal server error');
-  });
+  })
+  .catch(res.sendError);
 });
 
 matchscoreRouter.put('/:uuid',function(req, res){
   storage.fetchItem('matchscore', req.params.uuid)
   .then(function(matchscore){
+    if(!req.body.distance) return AppError.error400('bad object on put');
     matchscore.distance = req.body.distance;
     matchscore.score = req.body.score;
     matchscore.xCount = req.body.xCount;
     res.status(200).json(matchscore);
-  }).catch(function(err){
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode)
-      .send(err.responseMessage);
-      return;
-    }
-    res.status(500)
-    .send('internal server error');
-  });
+  }).catch(res.sendError);
 });
 
 matchscoreRouter.get('/:uuid', function(req, res){
   storage.fetchItem('matchscore', req.params.uuid)
   .then(function(matchscore){
     res.status(200).json(matchscore);
-  }).catch(function(err){
-    console.error(err.message);
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode)
-      .send(err.responseMessage);
-      return;
-    }
-    res.status(500)
-    .send('internal server error');
-  });
+  }).catch(res.sendError);
 });
 
 matchscoreRouter.delete('/:uuid', function(req, res){
